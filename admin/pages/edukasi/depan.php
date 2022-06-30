@@ -46,6 +46,49 @@ $paging     = pagination($data_rows, $global_limit, $paging, $admin_base_url . '
                <?php } ?>
             </div>
             <div class="col-12">
+               <div class="card">
+                  <div class="card-header">
+                     <h3 class="card-title"><i class="bi bi-journal-richtext"></i> Edukasi</h3>
+                     <div class="card-tools">
+                        <a href="<?=$admin_base_url?>index.php?pages=edukasi&sub_page=baru" class="btn bg-primary btn-sm"><i class="bi bi-plus-square"></i> Tambah Edukasi</a>
+                     </div>
+                  </div>
+                  <div class="card-body table-responsive p-0">
+                     <table class="table table-hover table-striped">
+                        <thead class="table-dark">
+                           <tr>
+                              <th width="1%">No.</th>
+                              <th width="1%" class="text-center"><i class="bi bi-pencil"></i></th>
+                              <th width="8%">Gambar</th>
+                              <th>Writer</th>
+                              <th>Judul</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <?php if (count($data) > 0): ?>
+                              <?php $no = 1; ?>
+                              <?php foreach ($data as $row) : ?>
+                                 <tr style="vertical-align: middle;">
+                                    <td><?=$no?></td>
+                                    <td><a href="<?=$admin_base_url?>index.php?pages=edukasi&sub_page=edit&id=<?=$row['id']?>" class="btn bg-warning btn-sm"><i class="bi bi-pencil"></i></a></td>
+                                    <td><img src="<?=$global_base_url.$global_upload_file?>edukasi/thumb/<?=$row['gambar']?>" alt="<?=$row['judul']?>" class="img img-fluid img-thumbnail"></td>
+                                    <td><?=$row['writer']?></td>
+                                    <td><?=$row['judul']?></td>
+                                 </tr>
+                                 <?php $no++; ?>
+                              <?php endforeach; ?>
+                           <?php else: ?>
+                              <tr>
+                                 <td colspan="2" class="text-center mailbox-subject">Tidak Ada Data !</td>
+                              </tr>
+                           <?php endif; ?>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="card-footer">
+                     <?=$paging?>
+                  </div>
+               </div>
             </div>
          </div>
       </div>

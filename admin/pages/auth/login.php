@@ -84,6 +84,7 @@ if (isset($post['masuk']) && $post['masuk'] == 'masuk') {
    <link rel="stylesheet" href="https://fontbit.io/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
    <script src="https://kit.fontawesome.com/ac3e39d20d.js" crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css" integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
@@ -127,7 +128,7 @@ if (isset($post['masuk']) && $post['masuk'] == 'masuk') {
                <div class="row">
                   <div class="col-8"></div>
                   <div class="col-4">
-                     <button type="submit" name="masuk" value="masuk" form="masuk" class="btn btn-primary btn-block">Masuk</button>
+                     <button type="submit" name="masuk" value="masuk" form="masuk" class="btn btn-primary btn-block"><i class="bi bi-box-arrow-in-right"></i> Masuk</button>
                   </div>
                </div>
             </form>

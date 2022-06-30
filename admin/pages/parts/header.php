@@ -20,7 +20,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css" integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	<link href="<?=$admin_base_url?>assets/vendors/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+	<link href="<?=$global_base_url1?>assets/vendors/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/ed0a33dc86.js" crossorigin="anonymous"></script>
 	<style type="text/css">
 		.card-title { margin-bottom: 0!important;}

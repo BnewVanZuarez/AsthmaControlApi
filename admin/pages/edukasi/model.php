@@ -7,15 +7,13 @@ function Daftar($parram){
 	$sql  = "
 		SELECT
 			`edukasi`.`id`,
-			`edukasi`.`users_id`,
 			`edukasi`.`slug`,
+			`edukasi`.`writer`,
 			`edukasi`.`judul`,
 			`edukasi`.`gambar`,
 			`edukasi`.`video`,
-			`edukasi`.`tanggal_input`,
-			`users`.`nama_lengkap`
+			`edukasi`.`tanggal_input`
 		FROM `edukasi`
-		LEFT JOIN `users` ON `edukasi`.`users_id`=`users`.`id`
 		WHERE TRUE
 	";
 	$sql .= " ORDER BY `edukasi`.`tanggal_input` DESC LIMIT ".$parram['startpoint'].", ".$global_limit;
@@ -32,7 +30,6 @@ function DaftarNumRows($parram){
 	$data = 0;
 	$sql = "
 		SELECT COUNT(`edukasi`.`id`) AS 'total' FROM `edukasi`
-		INNER JOIN `users` ON `edukasi`.`users_id`=`users`.`id`
 		WHERE TRUE
 	";
 	$query = mysqli_query($global_koneksi, $sql);
@@ -51,7 +48,7 @@ function Insert($parram){
 	$sql	 = "
 		INSERT INTO `edukasi`
 		SET
-			`users_id`='".$parram['users_id']."',
+			`writer`='".$parram['writer']."',
 			`slug`='".$parram['slug']."',
 			`judul`='".$parram['judul']."',
 			`gambar`='".$parram['gambar']."',
@@ -65,3 +62,45 @@ function Insert($parram){
    return $data;
 }
 // Insert End
+
+// Detail
+function Detail($parram){
+	global $global_koneksi;
+	$data = array();
+	$sql  = "
+      SELECT * FROM `edukasi` 
+      WHERE TRUE
+		AND `edukasi`.`id` = '".$parram['id']."'
+	";
+	$query = mysqli_query($global_koneksi, $sql);
+	if(mysqli_num_rows($query) > 0){
+		$data = mysqli_fetch_assoc($query);
+	}
+	return $data;
+}
+// Detail End
+
+// Update
+function Update($parram){
+	global $global_koneksi;
+	$data = false;
+	$sql	 = "
+		UPDATE `edukasi`
+		SET
+			`writer`='".$parram['writer']."',
+			`slug`='".$parram['slug']."',
+			`judul`='".$parram['judul']."',
+	";
+	if ($parram['gambar'] != "") {
+		$sql .= " `gambar`='".$parram['gambar']."', ";
+	}
+	$sql .= " `video`='".$parram['video']."',
+			`detail`='".$parram['detail']."'
+		WHERE `id`='".$parram['id']."'
+   ";
+   if(mysqli_query($global_koneksi, $sql)){
+   	$data = true;
+   }
+   return $data;
+}
+// Update End

@@ -1,4 +1,4 @@
 <?php
 session_unset(); 
 session_destroy();
-header('Location: '. $global_base_url);
+header('Location: '. $admin_base_url);
