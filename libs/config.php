@@ -16,7 +16,7 @@ $global_koneksi  = mysqli_connect($host, $user, $pass, $db) or die(mysqli_error(
 // Global Variable
 $global_protocol	= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://");
 $global_www			= (substr($_SERVER['HTTP_HOST'], 0, 4) === 'www.' ? 'www.' : '');
-$global_base_url	= $global_protocol.$global_www.'localhost/AsthmaControlApi/';
+$global_base_url	= $global_protocol.$global_www.'192.168.8.104/AsthmaControlApi/';
 $admin_base_url	= $global_protocol.$global_www.'localhost/AsthmaControlApi/admin/';
 $webview_base_url	= $global_protocol.$global_www.'localhost/AsthmaControlApi/webview/';
 $global_limit		= 50;
