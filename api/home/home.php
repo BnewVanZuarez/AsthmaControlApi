@@ -18,6 +18,7 @@ $info = array(
 if ($post['aksi'] == "cek_login") {
 
    $login = true;
+   $greeting = "Error !";
 	$logindata = array();
    $hash 	= (isset($post['hash']) ? $post['hash'] : "");
    $email	= (isset($post['email']) ? $post['email'] : "");
@@ -45,6 +46,7 @@ if ($post['aksi'] == "cek_login") {
 		$logindata = loginWithHash(array('email' => $email, 'hash' => $hash));
       if (count($logindata) > 0) {
 			$login = true;
+			$greeting = Ucapan();
       }else {
 			$login = false;
       }
@@ -56,7 +58,7 @@ if ($post['aksi'] == "cek_login") {
 			'info' => $info,
 			'login' => $login,
 			'login_data' => $logindata,
-			'greeting' => Ucapan(),
+			'greeting' => $greeting,
 			'edukasi' => Edukasi(),
 		)
 	));

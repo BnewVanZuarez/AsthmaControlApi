@@ -12,7 +12,7 @@ function Edukasi(){
 			`edukasi`.`writer`,
 			`edukasi`.`judul`,
 			#`edukasi`.`gambar`,
-			CONCAT('".$global_base_url.$global_upload_file."edukasi/', `edukasi`.`gambar`) AS 'gambar',
+			CONCAT('".$global_base_url.$global_upload_file."edukasi/thumb/', `edukasi`.`gambar`) AS 'gambar',
 			`edukasi`.`video`,
 			`edukasi`.`tanggal_input`
 		FROM `edukasi`
