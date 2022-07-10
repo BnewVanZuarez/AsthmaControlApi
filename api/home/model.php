@@ -2,6 +2,8 @@
 function Edukasi(){
 	global $global_koneksi;
 	global $global_limit;
+	global $global_base_url;
+	global $global_upload_file;
 	$data = array();
 	$sql  = "
 		SELECT
@@ -9,7 +11,8 @@ function Edukasi(){
 			`edukasi`.`slug`,
 			`edukasi`.`writer`,
 			`edukasi`.`judul`,
-			`edukasi`.`gambar`,
+			#`edukasi`.`gambar`,
+			CONCAT('".$global_base_url.$global_upload_file."edukasi/', `edukasi`.`gambar`) AS 'gambar',
 			`edukasi`.`video`,
 			`edukasi`.`tanggal_input`
 		FROM `edukasi`
