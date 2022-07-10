@@ -57,6 +57,7 @@ if ($post['aksi'] == "cek_login") {
 			'login' => $login,
 			'login_data' => $logindata,
 			'greeting' => Ucapan(),
+			'edukasi' => Edukasi(),
 		)
 	));
 
