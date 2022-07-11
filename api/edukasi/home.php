@@ -15,7 +15,7 @@ $info = array(
 	'link' => ""
 );
 
-if ($post['aksi'] == "daftar_info") {
+if ($post['aksi'] == "edukasi") {
 
    $login      = true;
    $hash       = (isset($post['hash']) ? $post['hash'] : "");
