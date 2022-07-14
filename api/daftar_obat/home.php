@@ -44,8 +44,8 @@ if ($post['aksi'] == "obat") {
       if (count($logindata) > 0) {
 			$login = true;
          $obat_num_rows = 0;
-         $obat_num_rows = DaftarNumRows(array());
-         $obat = Daftar(array('startpoint' => $startpoint));
+         $obat_num_rows = DaftarNumRows(array('users_id' => $logindata['id']));
+         $obat = Daftar(array('users_id' => $logindata['id'], 'startpoint' => $startpoint));
       }else {
 			$login = false;
       }

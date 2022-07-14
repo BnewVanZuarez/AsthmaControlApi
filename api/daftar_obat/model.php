@@ -14,6 +14,7 @@ function Daftar($parram){
          `daftar_obat`.`tanggal_input`
       FROM `daftar_obat`
       WHERE TRUE
+		AND `daftar_obat`.`users_id`='".$parram['users_id']."'
 	";
 	$sql .= " ORDER BY `daftar_obat`.`tanggal_input` DESC LIMIT ".$parram['startpoint'].", ".$global_limit;
 	$query = mysqli_query($global_koneksi, $sql);
@@ -30,6 +31,7 @@ function DaftarNumRows($parram){
 	$sql = "
 		SELECT COUNT(`daftar_obat`.`id`) AS 'total' FROM `daftar_obat`
 		WHERE TRUE
+		AND `daftar_obat`.`users_id`='".$parram['users_id']."'
 	";
 	$query = mysqli_query($global_koneksi, $sql);
 	if(mysqli_num_rows($query) > 0){
