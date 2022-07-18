@@ -56,3 +56,38 @@ function InputObat($parram){
    }
    return $data;
 }
+function DetailObat($parram){
+	global $global_koneksi;
+	$data = array();
+	$sql  = "
+      SELECT
+         `daftar_obat`.`id`,
+         `daftar_obat`.`users_id`,
+         `daftar_obat`.`nama_obat`,
+         `daftar_obat`.`dosis`
+      FROM `daftar_obat`
+      WHERE TRUE
+      AND `daftar_obat`.`id`='".$parram['id']."'
+	";
+	$query = mysqli_query($global_koneksi, $sql);
+	if(mysqli_num_rows($query) > 0){
+		$data = mysqli_fetch_assoc($query);
+	}
+	return $data;
+}
+function UpdateObat($parram){
+	global $global_koneksi;
+	$data = false;
+	$sql	 = "
+		UPDATE `daftar_obat`
+		SET 
+         `users_id`='".$parram['users_id']."',
+         `nama_obat`='".$parram['nama_obat']."',
+         `dosis`='".$parram['dosis']."'
+		WHERE `id`='".$parram['id']."'
+	";
+   if(mysqli_query($global_koneksi, $sql)){
+   	$data = true;
+   }
+   return $data;
+}

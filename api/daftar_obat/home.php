@@ -139,4 +139,164 @@ if ($post['aksi'] == "obat") {
 		)
 	));
    
+}elseif ($post['aksi'] == "detail_obat") {
+
+   $login = true;
+   $hash  = (isset($post['hash']) ? $post['hash'] : "");
+   $email = (isset($post['email']) ? $post['email'] : "");
+   $obat  = (isset($post['obat']) ? $post['obat'] : "");
+
+	if ($info['detail'] == "") {
+	   if ($hash == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Hash Tidak Boleh Kosong";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($email == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\@\.\-\_]*$/", "text" => $email)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Hanya Boleh Menggunakan Karakter: 1) a sampai z 2) A sampai Z 3) 0 sampai 9 4) @. - _";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($obat == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Obat Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[0-9]*$/", "text" => $obat)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Obat Hanya Boleh Menggunakan Karakter: 1) 0 sampai 9 ";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+		$logindata = loginWithHash(array('email' => $email, 'hash' => $hash));
+      if (count($logindata) > 0) {
+			$login = true;
+         $obat = DetailObat(array('id' => $obat));
+      }else {
+			$login = false;
+      }
+	}
+
+	echo json_encode(array(
+		'status' => true,
+		'data' => array(
+			'info' => $info,
+			'login_data' => $logindata,
+			'login' => $login,
+         'obat' => $obat,
+		)
+	));
+
+}elseif ($post['aksi'] == "update_obat") {
+
+   $login      = true;
+   $hash       = (isset($post['hash']) ? $post['hash'] : "");
+   $email      = (isset($post['email']) ? $post['email'] : "");
+   $nama_obat  = (isset($post['nama_obat']) ? $post['nama_obat'] : "");
+   $dosis      = (isset($post['dosis']) ? $post['dosis'] : "");
+   $obat       = (isset($post['obat']) ? $post['obat'] : "");
+
+	if ($info['detail'] == "") {
+	   if ($hash == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Hash Tidak Boleh Kosong";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($email == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\@\.\-\_]*$/", "text" => $email)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Hanya Boleh Menggunakan Karakter: 1) a sampai z 2) A sampai Z 3) 0 sampai 9 4) @. - _";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($nama_obat == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Nama Obat Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\!\@\#\%\*\(\)\-\_\+\=\,\.\/\?\ ]*$/", "text" => $nama_obat)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Nama Obat hanya boleh karakter : " . "\n" . "1) a sampai z" . "\n" . "2) A sampai Z" . "\n" . "3) 0 sampai 9" . "\n" . "4) ! @ # % * ( ) - _ + = , . / ? dan spasi";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($dosis == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Dosis Harian Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\!\@\#\%\*\(\)\-\_\+\=\,\.\/\?\ ]*$/", "text" => $dosis)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Dosis Harian hanya boleh karakter : " . "\n" . "1) a sampai z" . "\n" . "2) A sampai Z" . "\n" . "3) 0 sampai 9" . "\n" . "4) ! @ # % * ( ) - _ + = , . / ? dan spasi";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($obat == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Obat Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[0-9]*$/", "text" => $obat)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Obat Hanya Boleh Menggunakan Karakter: 1) 0 sampai 9 ";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+		$logindata = loginWithHash(array('email' => $email, 'hash' => $hash));
+      if (count($logindata) > 0) {
+         $input = UpdateObat(
+            array(
+               'users_id' => Escape($logindata['id']),
+               'nama_obat' => Escape($nama_obat),
+               'dosis' => Escape($dosis),
+               'id' => Escape($obat),
+            )
+         );
+         if ($input) {
+            $info['error'] = "1";
+            $info['detail'] = "Berhasil menyimpan Obat";
+         } else {
+            $info['error'] = "2";
+            $info['detail'] = "Gagal menyimpan Obat, silahkan coba lagi !";
+         }
+      }else {
+			$login = false;
+      }
+	}
+
+	echo json_encode(array(
+		'status' => true,
+		'data' => array(
+			'info' => $info,
+			'login_data' => $logindata,
+			'login' => $login
+		)
+	));
+
+}else {
+	
+	$info = array(
+		'error' => "2",
+		'detail' => "Error Aksi !",
+		'link' => ""
+	);
+
+	$hash = "";
+
+	echo json_encode(array(
+		'status' => true,
+		'data' => array(
+			'info' => $info,
+			'hash' => $hash
+		)
+	));
+
 }
