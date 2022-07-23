@@ -15,12 +15,11 @@ $info = array(
 	'link' => ""
 );
 
-if ($post['aksi'] == "edukasi") {
+if ($post['aksi'] == "rumah_sakit") {
 
    $login      = true;
    $hash       = (isset($post['hash']) ? $post['hash'] : "");
    $email      = (isset($post['email']) ? $post['email'] : "");
-   $startpoint = (isset($post['startpoint']) ? $post['startpoint'] : 0);
 
 	if ($info['detail'] == "") {
 	   if ($hash == "") {
@@ -43,9 +42,7 @@ if ($post['aksi'] == "edukasi") {
 		$logindata = loginWithHash(array('email' => $email, 'hash' => $hash));
       if (count($logindata) > 0) {
 			$login = true;
-         $edukasi_num_rows = 0;
-         $edukasi_num_rows = DaftarNumRows(array());
-         $edukasi = Daftar(array('startpoint' => $startpoint));
+         $rumahsakit = Daftar(array());
       }else {
 			$login = false;
       }
@@ -57,8 +54,7 @@ if ($post['aksi'] == "edukasi") {
 			'info' => $info,
 			'login_data' => $logindata,
 			'login' => $login,
-         'edukasi' => $edukasi,
-         'edukasi_num_rows' => $edukasi_num_rows
+         'rumahsakit' => $rumahsakit
 		)
 	));
 
