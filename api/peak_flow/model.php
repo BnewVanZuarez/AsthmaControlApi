@@ -40,3 +40,20 @@ function DaftarNumRows($parram){
 	}
 	return $data;
 }
+function Input($parram){
+	global $global_koneksi;
+	$data = false;
+	$sql	 = "
+		INSERT INTO `peak_flow`
+		SET 
+         `users_id`='".$parram['users_id']."',
+         `tanggal`='".$parram['tanggal']."',
+         `nilai`='".$parram['nilai']."',
+         `warna`='".$parram['warna']."',
+         `tanggal_input`='".$parram['tanggal_input']."'
+	";
+   if(mysqli_query($global_koneksi, $sql)){
+   	$data = true;
+   }
+   return $data;
+}

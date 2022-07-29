@@ -14,6 +14,15 @@ $info = array(
 	'detail' => "",
 	'link' => ""
 );
+$logindata = array(
+	'id' => "",
+	'email' => "",
+	'password' => "",
+	'nama_lengkap' => "",
+	'no_telp' => "",
+	'level' => "",
+	'status' => ""
+);
 
 if ($post['aksi'] == "daily_jurnal") {
 
@@ -141,12 +150,11 @@ if ($post['aksi'] == "daily_jurnal") {
 	}
 
 	if ($info['detail'] == "") {
-	   if ($gejala_value == "") {
-	      $info['error'] = "2";
-	      $info['detail'] = "Gejala Tidak Boleh Kosong";
-	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\!\@\#\%\*\(\)\-\_\+\=\,\.\/\?\ ]*$/", "text" => $gejala_value)) ) {
-	      $info['error'] = "2";
-	      $info['detail'] = "Gejala hanya boleh karakter : " . "\n" . "1) a sampai z" . "\n" . "2) A sampai Z" . "\n" . "3) 0 sampai 9" . "\n" . "4) ! @ # % * ( ) - _ + = , . / ? dan spasi";
+	   if ($gejala_value != "") {
+			if (!stringAllow(array("where" => "/^[a-zA-Z0-9\!\@\#\%\*\(\)\-\_\+\=\,\.\/\?\ ]*$/", "text" => $gejala_value)) ) {
+				$info['error'] = "2";
+				$info['detail'] = "Gejala hanya boleh karakter : " . "\n" . "1) a sampai z" . "\n" . "2) A sampai Z" . "\n" . "3) 0 sampai 9" . "\n" . "4) ! @ # % * ( ) - _ + = , . / ? dan spasi";
+			}
 	   }
 	}
 
@@ -161,12 +169,11 @@ if ($post['aksi'] == "daily_jurnal") {
 	}
 
 	if ($info['detail'] == "") {
-	   if ($paparan_alergen == "") {
-	      $info['error'] = "2";
-	      $info['detail'] = "Paparan Alergen Tidak Boleh Kosong";
-	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\!\@\#\%\*\(\)\-\_\+\=\,\.\/\?\ ]*$/", "text" => $paparan_alergen)) ) {
-	      $info['error'] = "2";
-	      $info['detail'] = "Paparan Alergen hanya boleh karakter : " . "\n" . "1) a sampai z" . "\n" . "2) A sampai Z" . "\n" . "3) 0 sampai 9" . "\n" . "4) ! @ # % * ( ) - _ + = , . / ? dan spasi";
+	   if ($paparan_alergen != "") {
+			if (!stringAllow(array("where" => "/^[a-zA-Z0-9\!\@\#\%\*\(\)\-\_\+\=\,\.\/\?\ ]*$/", "text" => $paparan_alergen)) ) {
+				$info['error'] = "2";
+				$info['detail'] = "Paparan Alergen hanya boleh karakter : " . "\n" . "1) a sampai z" . "\n" . "2) A sampai Z" . "\n" . "3) 0 sampai 9" . "\n" . "4) ! @ # % * ( ) - _ + = , . / ? dan spasi";
+			}
 	   }
 	}
 

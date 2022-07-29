@@ -72,6 +72,86 @@ if ($post['aksi'] == "peak_flow") {
    $nilai      = (isset($post['nilai']) ? $post['nilai'] : "");
    $warna      = (isset($post['warna']) ? $post['warna'] : "");
 
+	if ($info['detail'] == "") {
+	   if ($hash == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Hash Tidak Boleh Kosong";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($email == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\@\.\-\_]*$/", "text" => $email)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Hanya Boleh Menggunakan Karakter: 1) a sampai z 2) A sampai Z 3) 0 sampai 9 4) @. - _";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($tanggal == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Tanggal Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[0-9\-]*$/", "text" => $tanggal)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Tanggal Hanya Boleh Menggunakan Karakter: 1) A sampai Z 2) - ";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($nilai == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Nilai Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[0-9]*$/", "text" => $nilai)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Nilai Hanya Boleh Menggunakan Karakter: 1) A sampai Z ";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($warna == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Warna Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[0-9]*$/", "text" => $warna)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Warna Hanya Boleh Menggunakan Karakter: 1) A sampai Z ";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+		$logindata = loginWithHash(array('email' => $email, 'hash' => $hash));
+      if (count($logindata) > 0) {
+         $input = Input(
+            array(
+               'users_id' => Escape($logindata['id']),
+               'tanggal' => Escape($tanggal),
+               'nilai' => Escape($nilai),
+               'warna' => Escape($warna),
+               'tanggal_input' => date("Y-m-d H:i:s"),
+            )
+         );
+         if ($input) {
+            $info['error'] = "1";
+            $info['detail'] = "Berhasil menyimpan Data Peak Flow";
+         } else {
+            $info['error'] = "2";
+            $info['detail'] = "Gagal menyimpan Data Peak Flow, silahkan coba lagi !";
+         }
+      }else {
+			$login = false;
+      }
+	}
+
+	echo json_encode(array(
+		'status' => true,
+		'data' => array(
+			'info' => $info,
+			'login_data' => $logindata,
+			'login' => $login
+		)
+	));
+
 }else {
 	
 	$info = array(

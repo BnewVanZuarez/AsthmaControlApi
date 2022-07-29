@@ -14,6 +14,15 @@ $info = array(
 	'detail' => "",
 	'link' => ""
 );
+$logindata = array(
+	'id' => "",
+	'email' => "",
+	'password' => "",
+	'nama_lengkap' => "",
+	'no_telp' => "",
+	'level' => "",
+	'status' => ""
+);
 
 if ($post['aksi'] == "cek_login") {
 
