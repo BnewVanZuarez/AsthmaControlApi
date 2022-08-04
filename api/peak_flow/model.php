@@ -57,3 +57,26 @@ function Input($parram){
    }
    return $data;
 }
+function Chart($parram){
+	global $global_koneksi;
+	$data = array();
+	$sql  = "
+      SELECT
+         `peak_flow`.`id`,
+         DATE_FORMAT(`peak_flow`.`tanggal`, '%d %b %Y') AS 'tanggal',
+         `peak_flow`.`nilai`,
+         `peak_flow`.`warna`,
+         `peak_flow`.`tanggal_input`
+      FROM `peak_flow`
+      WHERE TRUE
+		AND `peak_flow`.`users_id`='".$parram['users_id']."'
+	";
+	$sql .= " ORDER BY `peak_flow`.`tanggal_input` DESC ";
+	$query = mysqli_query($global_koneksi, $sql);
+	if(mysqli_num_rows($query) > 0){
+		while($row = mysqli_fetch_assoc($query)){
+			$data[] = $row;
+		}
+	}
+	return $data;
+}

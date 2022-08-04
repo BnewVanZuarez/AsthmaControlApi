@@ -152,6 +152,49 @@ if ($post['aksi'] == "peak_flow") {
 		)
 	));
 
+}elseif ($post['aksi'] == "peak_flow_chart") {
+
+   $login      = true;
+   $hash       = (isset($post['hash']) ? $post['hash'] : "");
+   $email      = (isset($post['email']) ? $post['email'] : "");
+
+	if ($info['detail'] == "") {
+	   if ($hash == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Hash Tidak Boleh Kosong";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($email == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\@\.\-\_]*$/", "text" => $email)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Hanya Boleh Menggunakan Karakter: 1) a sampai z 2) A sampai Z 3) 0 sampai 9 4) @. - _";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+		$logindata = loginWithHash(array('email' => $email, 'hash' => $hash));
+      if (count($logindata) > 0) {
+			$login = true;
+         $chart = Chart(array('users_id' => $logindata['id']));
+      }else {
+			$login = false;
+      }
+	}
+
+	echo json_encode(array(
+		'status' => true,
+		'data' => array(
+			'info' => $info,
+			'login_data' => $logindata,
+			'login' => $login,
+			'chart' => $chart
+		)
+	));
+
 }else {
 	
 	$info = array(
