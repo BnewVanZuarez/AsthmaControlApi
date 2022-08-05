@@ -87,8 +87,9 @@ function DaftarPesan($parram){
          `tanya_jawab_chat`.`tanggal_input`
       FROM `tanya_jawab_chat`
       WHERE TRUE
+      AND `tanya_jawab_chat`.`tj_id`='".$parram['tj_id']."'
 	";
-	$sql .= " ORDER BY `tanya_jawab_chat`.`tanggal_input` DESC ";
+	$sql .= " ORDER BY `tanya_jawab_chat`.`tanggal_input` ASC ";
 	$query = mysqli_query($global_koneksi, $sql);
 	if(mysqli_num_rows($query) > 0){
 		while($row = mysqli_fetch_assoc($query)){

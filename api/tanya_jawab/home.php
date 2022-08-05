@@ -180,7 +180,7 @@ if ($post['aksi'] == "tanya_jawab") {
       if (count($logindata) > 0) {
 			$login = true;
          $detail = DetailChat(array('id' => Escape($tiket_id)));
-         $riwayat = DaftarPesan(array('pasien_id' => Escape($tiket_id)));
+         $riwayat = DaftarPesan(array('tj_id' => Escape($tiket_id)));
       }else {
 			$login = false;
       }
@@ -198,6 +198,81 @@ if ($post['aksi'] == "tanya_jawab") {
 	));
 
 }elseif ($post['aksi'] == "kirim_pesan") {
+
+   $login      = true;
+   $hash       = (isset($post['hash']) ? $post['hash'] : "");
+   $email      = (isset($post['email']) ? $post['email'] : "");
+   $tiket_id   = (isset($post['tiket_id']) ? $post['tiket_id'] : "");
+   $pesan   	= (isset($post['pesan']) ? $post['pesan'] : "");
+
+	if ($info['detail'] == "") {
+	   if ($hash == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Hash Tidak Boleh Kosong";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($email == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\@\.\-\_]*$/", "text" => $email)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Email Hanya Boleh Menggunakan Karakter: 1) a sampai z 2) A sampai Z 3) 0 sampai 9 4) @. - _";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($tiket_id == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Tiket Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[0-9]*$/", "text" => $tiket_id)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Tiket hanya boleh karakter : " . "\n" . "1) 0 sampai 9";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+	   if ($pesan == "") {
+	      $info['error'] = "2";
+	      $info['detail'] = "Pesan Tidak Boleh Kosong";
+	   }elseif (!stringAllow(array("where" => "/^[a-zA-Z0-9\!\@\#\%\*\(\)\-\_\+\=\,\.\/\?\ ]*$/", "text" => $pesan)) ) {
+	      $info['error'] = "2";
+	      $info['detail'] = "Pesan hanya boleh karakter : " . "\n" . "1) a sampai z" . "\n" . "2) A sampai Z" . "\n" . "3) 0 sampai 9" . "\n" . "4) ! @ # % * ( ) - _ + = , . / ? dan spasi";
+	   }
+	}
+
+	if ($info['detail'] == "") {
+		$logindata = loginWithHash(array('email' => $email, 'hash' => $hash));
+      if (count($logindata) > 0) {
+         $input = KirimPesan(
+            array(
+               'tj_id' => Escape($tiket_id),
+               'pesan' => Escape($pesan),
+               'tipe' => "1",
+               'tanggal_input' => date("Y-m-d H:i:s"),
+            )
+         );
+         if ($input) {
+            $info['error'] = "1";
+            $info['detail'] = "Berhasil membuat tiket, anda dapat memulai percakapan";
+         } else {
+            $info['error'] = "2";
+            $info['detail'] = "Gagal membuat tiket, silahkan coba lagi !";
+         }
+      }else {
+			$login = false;
+      }
+	}
+
+	echo json_encode(array(
+		'status' => true,
+		'data' => array(
+			'info' => $info,
+			'login_data' => $logindata,
+			'login' => $login
+		)
+	));
 
 }else {
 	

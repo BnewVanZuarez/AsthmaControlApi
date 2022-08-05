@@ -27,11 +27,24 @@
                   <p>Home</p>
                </a>
             </li>
+            <li class="nav-item">
+               <a href="<?=$admin_base_url?>index.php?pages=tanyajawab" class="nav-link <?=$get['pages'] == "tanyajawab" ? 'active' : ''?>">
+                  <i class="nav-icon bi bi-chat-left-dots-fill"></i>
+                  <p>Tanya Jawab</p>
+               </a>
+            </li>
             <li class="nav-header">Edukasi</li>
             <li class="nav-item">
                <a href="<?=$admin_base_url?>index.php?pages=edukasi" class="nav-link <?=$get['pages'] == "edukasi" ? 'active' : ''?>">
                   <i class="nav-icon bi bi-journal-richtext"></i>
                   <p>Edukasi</p>
+               </a>
+            </li> 
+            <li class="nav-header">Rencana Aksi Asma</li>
+            <li class="nav-item">
+               <a href="<?=$admin_base_url?>index.php?pages=rencana" class="nav-link <?=$get['pages'] == "rencana" ? 'active' : ''?>">
+                  <i class="nav-icon bi bi-file-earmark-ruled-fill"></i>
+                  <p>Renacana Aksi Asma</p>
                </a>
             </li> 
             <li class="nav-header">Rumah Sakit</li>
