@@ -17,8 +17,14 @@ if (isset($session) && isset($session['auth']) && isset($session['auth']['email'
 			case 'home':
 				include("pages/home/home.php");
 				break;
+			case 'tanyajawab':
+				include("pages/tanyajawab/home.php");
+				break;
 			case 'edukasi':
 				include("pages/edukasi/home.php");
+				break;
+			case 'rencana':
+				include("pages/rencana/home.php");
 				break;
 			case 'rumahsakit':
 				include("pages/rumahsakit/home.php");

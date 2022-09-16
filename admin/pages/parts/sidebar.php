@@ -10,7 +10,7 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-            <img src="https://blobcdn.com/blob.svg" class="img-circle elevation-2" alt="<?=$login['nama_lengkap']?>">
+            <img src="<?=$global_base_url?>assets/img/user_male.png" class="img-circle elevation-2" alt="<?=$login['nama_lengkap']?>">
 			</div>
 			<div class="info">
 				<a href="<?=$admin_base_url?>index.php?pages=profile" class="d-block"><?=$login['nama_lengkap']?> </a>

@@ -26,6 +26,16 @@ function HtmlDecode($parram){
 // XSS Protection End
 
 // Whatsapp Number
+function Excerpt($parram){
+	if (strlen($parram['text']) < 40) {
+		return $parram['text'];
+	} else {
+		$new = wordwrap($parram['text'], 38);
+		$new = explode("\n", $new);
+		$new = $new[0] . ' ...';
+		return $new;
+	}
+}
 function NoWhatsapp($parram){
 	$new = substr($parram['nomor'], 1);
 	if (substr($parram['nomor'], 0, 1) == "0") {
